@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroStream AI - Launching Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Main content */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Single flowing beam */
+        .beam-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+            opacity: 0.9;
+        }
+
+        .beam {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 400px;
+            height: 300%;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(184, 55, 252, 0.1) 20%,
+                rgba(184, 55, 252, 0.8) 35%,
+                rgba(123, 58, 237, 0.9) 50%,
+                rgba(6, 182, 212, 0.8) 65%,
+                rgba(236, 72, 153, 0.1) 80%,
+                transparent 100%
+            );
+            filter: blur(80px);
+            transform: rotate(45deg);
+            animation: diagonalFlow 10s ease-in-out infinite;
+        }
+
+        .beam::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(120px);
+            opacity: 0.5;
+        }
+
+        @keyframes diagonalFlow {
+            0% {
+                transform: rotate(45deg) translate(-100%, 0);
+            }
+            100% {
+                transform: rotate(45deg) translate(200%, 0);
+            }
+        }
+
+        /* Main content */
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 5.5rem;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.3s forwards;
+            background: linear-gradient(
+                135deg,
+                #b837fc 0%,
+                #7c3aed 20%,
+                #06b6d4 40%,
+                #ec4899 60%,
+                #b837fc 80%,
+                #7c3aed 100%
+            );
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 1.2s ease-out 0.3s forwards, gradientShift 8s ease infinite;
+            position: relative;
+        }
+
+        .logo::before {
+            content: 'NeuroStream AI';
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(184, 55, 252, 0.1) 50%,
+                transparent 70%
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        /* Tagline */
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 4rem;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.5s forwards;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        /* Launching text */
+        .launching-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.7s forwards;
+        }
+
+        .launching-label {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+        }
+
+        .launching-soon {
+            font-size: 1.75rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            background: linear-gradient(
+                180deg,
+                rgba(255, 255, 255, 0.8) 0%,
+                rgba(255, 255, 255, 0.5) 100%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Email form */
+        .notify-section {
+            width: 100%;
+            max-width: 420px;
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.9s forwards;
+        }
+
+        .notify-text {
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .email-input {
+            flex: 1;
+            padding: 0.875rem 1.25rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.9375rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .email-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .submit-btn {
+            padding: 0.875rem 1.75rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(184, 55, 252, 0.2),
+                transparent
+            );
+            transition: left 1.2s ease;
+        }
+
+        .submit-btn:hover {
+            border-color: rgba(184, 55, 252, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .logo {
+                font-size: 4rem;
+            }
+            
+            .launching-soon {
+                font-size: 2.5rem;
+            }
+            
+            .email-form {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .email-input,
+            .submit-btn {
+                width: 100%;
+            }
+            
+            .beam {
+                width: 200px;
+                filter: blur(60px);
+            }
+        }
+
+        /* Subtle gradient overlay */
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                ellipse at center,
+                transparent 0%,
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            pointer-events: none;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Single flowing beam -->
+    <div class="beam-container">
+        <div class="beam"></div>
+    </div>
+
+    <!-- Subtle gradient overlay -->
+    <div class="gradient-overlay"></div>
+
+    <!-- Main content -->
+    <div class="container">
+        <h1 class="logo">NeuroStream AI</h1>
+        <p class="tagline">Seamless streams of intelligence, from source to insight</p>
+        
+        <div class="launching-section">
+            <div class="launching-label">Launching</div>
+            <h2 class="launching-soon">Soon</h2>
+        </div>
+        
+        <div class="notify-section">
+            <p class="notify-text">Be the first to experience the next generation of data systems.</p>
+            <form class="email-form" onsubmit="handleSubmit(event)">
+                <input 
+                    type="email" 
+                    class="email-input" 
+                    placeholder="Enter your email"
+                    required
+                />
+                <button type="submit" class="submit-btn">
+                    Notify me
+                </button>
+            </form>
+            <div class="success-message">
+                Thank you. We'll be in touch.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function handleSubmit(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const email = form.querySelector('.email-input').value;
+            const submitBtn = form.querySelector('.submit-btn');
+            const successMessage = document.querySelector('.success-message');
+            
+            // Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            try {
+                // Option 1: Google Sheets Integration
+                // Replace 'YOUR_GOOGLE_SCRIPT_URL' with your actual Google Apps Script URL
+                const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL';
+                
+                // Uncomment this section when you have your Google Script URL
+                /*
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email, timestamp: new Date().toISOString() })
+                });
+                */
+                
+                // Option 2: For Netlify Forms (if hosting on Netlify)
+                // The form will automatically work if you add the 'netlify' attribute to the form tag
+                
+                // For now, just simulate success
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Hide form and show success
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Reset after delay
+                setTimeout(() => {
+                    form.style.display = 'flex';
+                    successMessage.style.display = 'none';
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Notify me';
+                }, 5000);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Notify me';
+                alert('There was an error. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
